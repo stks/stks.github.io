@@ -1,0 +1,712 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Coronavirus statistics</title>
+	<style>
+		table {
+			width: 100%;
+			border: 1px solid #000;
+			text-align: center;
+			margin-bottom: 30px;
+		}
+		table th,
+		table td {
+			border: 1px solid #000;
+			text-align: center;
+		}
+	</style>
+	<script>
+		window.onload = function () {
+			var ro = {
+				cases: [
+					1,
+					1,
+					1,
+					3,
+					3,
+					3,
+					3,
+					4,
+					6,
+					6,
+					8,
+					11,
+					14,
+					15,
+					29,
+					29,
+					48,
+					86,
+					99,
+					139,
+					168,
+					217,
+					260,
+					277,
+					308,
+					367,
+					433,
+					576,
+					762,
+					906,
+					1029,
+					1292,
+					1452,
+					1760,
+				],
+				tests: [
+					0,
+					0,
+					17,
+					17,
+					17,
+					49,
+					475,
+					475,
+					475,
+					657,
+					734,
+					809,
+					948,
+					948,
+					1179,
+					1179,
+					1179,
+					1179,
+					1179,
+					3205,
+					3708,
+					4150,
+					4670,
+					4973,
+					8284,
+					8915,
+					9967,
+					11223,
+					12624,
+					14466,
+					15998,
+					17453,
+					19663,
+					21460,
+				],
+				recovered: [
+					0,
+					0,
+					0,
+					0,
+					0,
+					1,
+					1,
+					1,
+					1,
+					3,
+					3,
+					3,
+					5,
+					5,
+					5,
+					5,
+					6,
+					6,
+					6,
+					9,
+					9,
+					19,
+					19,
+					25,
+					31,
+					52,
+					64,
+					73,
+					79,
+					86,
+					94,
+					115,
+					139,
+					169,
+				],
+				deaths: [
+					0,
+					0,
+					0,
+					0,
+					0,
+					0,
+					0,
+					0,
+					0,
+					0,
+					0,
+					0,
+					0,
+					0,
+					0,
+					0,
+					0,
+					0,
+					0,
+					0,
+					0,
+					0,
+					0,
+					0,
+					0,
+					0,
+					2,
+					4,
+					8,
+					13,
+					17,
+					24,
+					29,
+					38,
+				]
+			};
+			var it = {
+				cases: [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					3,
+					3,
+					3,
+					3,
+					3,
+					4,
+					21,
+					79,
+					157,
+					229,
+					322,
+					400,
+					650,
+					888,
+					1128,
+					1694,
+					2036,
+					2502,
+					3089,
+					3858,
+					4636,
+					5883,
+					7375,
+					9172,
+					10149,
+					12462,
+					15113,
+					17660,
+					21157,
+					24747,
+					27980,
+					31506,
+					35713,
+					41035,
+					47021,
+					53578,
+					59138,
+					63927,
+					69176,
+					74386,
+					80539,
+					86498,
+					92472,
+				],
+				tests: [
+					0,
+					0,
+					0,
+					0,
+					0,
+					0,
+					0,
+					0,
+					0,
+					0,
+					0,
+					0,
+					0,
+					0,
+					0,
+					0,
+					0,
+					0,
+					0,
+					0,
+					0,
+					0,
+					0,
+					0,
+					0,
+					0,
+					4324,
+					8623,
+					9587,
+					12014,
+					15695,
+					18661,
+					21127,
+					23345,
+					25856,
+					29837,
+					32362,
+					36359,
+					42062,
+					49937,
+					53826,
+					60761,
+					73154,
+					86011,
+					97488,
+					109170,
+					124899,
+					137962,
+					148657,
+					165541,
+					182777,
+					206886,
+					233222,
+					258402,
+					275468,
+					296964,
+					324445,
+					361060,
+					394079,
+					429526,
+				],
+				recovered: [
+					0,
+					0,
+					0,
+					0,
+					0,
+					0,
+					0,
+					0,
+					0,
+					0,
+					0,
+					0,
+					0,
+					0,
+					0,
+					0,
+					0,
+					0,
+					0,
+					0,
+					0,
+					0,
+					0,
+					0,
+					0,
+					0,
+					1,
+					1,
+					3,
+					45,
+					46,
+					50,
+					83,
+					149,
+					160,
+					276,
+					414,
+					523,
+					589,
+					622,
+					724,
+					1004,
+					1045,
+					1258,
+					1439,
+					1966,
+					2335,
+					2749,
+					2941,
+					4025,
+					4440,
+					5129,
+					6072,
+					7024,
+					7432,
+					8326,
+					9362,
+					10361,
+					10950,
+					12384,
+				],
+				deaths: [
+					0,
+					0,
+					0,
+					0,
+					0,
+					0,
+					0,
+					0,
+					0,
+					0,
+					0,
+					0,
+					0,
+					0,
+					0,
+					0,
+					0,
+					0,
+					0,
+					0,
+					0,
+					0,
+					0,
+					1,
+					2,
+					3,
+					7,
+					10,
+					12,
+					17,
+					21,
+					29,
+					34,
+					52,
+					79,
+					107,
+					148,
+					197,
+					233,
+					366,
+					463,
+					631,
+					827,
+					1016,
+					1266,
+					1441,
+					1809,
+					2158,
+					2503,
+					2978,
+					3405,
+					4032,
+					4825,
+					5476,
+					6077,
+					6820,
+					7503,
+					8165,
+					9134,
+					10023,
+				]
+			};
+
+			function findGetParameter(parameterName) {
+				var result = null,
+					tmp = [];
+				var items = location.search.substr(1).split("&");
+				for (var index = 0; index < items.length; index++) {
+					tmp = items[index].split("=");
+					if (tmp[0] === parameterName) result = decodeURIComponent(tmp[1]);
+				}
+				return result;
+			}
+
+			function getDaysArray(start, end) {
+				for(var arr=[],dt=start; dt<=end; dt.setDate(dt.getDate()+1)){
+					arr.push(new Date(dt));
+				}
+				return arr;
+			}
+
+			function plotChart( elementID, title, OxTitle, OyTitle, ro_array_data, it_array_data ) {
+				var type = findGetParameter('type') ? findGetParameter('type') : 'column' ;
+				var chart = new CanvasJS.Chart(elementID, {
+					animationEnabled: true,
+					zoomEnabled: true,
+					title:{
+						text: title
+					},
+					axisX: {
+						title: OxTitle
+					},
+					axisY: {
+						title: OyTitle
+					},
+					legend:{
+						cursor: "pointer",
+						fontSize: 16,
+					},
+					toolTip:{
+						shared: true
+					},
+					data: [
+						{
+							name: "Romania",
+							type: type,
+							showInLegend: true,
+							markerSize: 0,
+							dataPoints: ro_array_data
+						},
+						{
+							name: "Italy",
+							type: type,
+							showInLegend: true,
+							markerSize: 0,
+							dataPoints: it_array_data
+						}
+					]
+				});
+				chart.render();
+			}
+
+			function plotDailyChart( elementID, title, OxTitle, OyTitle, ro_array_data ) {
+				var type = findGetParameter('type') ? findGetParameter('type') : 'column' ;
+				var chart = new CanvasJS.Chart(elementID, {
+					animationEnabled: true,
+					zoomEnabled: true,
+					title:{
+						text: title
+					},
+					axisX: {
+						title: OxTitle
+					},
+					axisY: {
+						title: OyTitle
+					},
+					legend:{
+						cursor: "pointer",
+						fontSize: 16,
+					},
+					toolTip:{
+						shared: true
+					},
+					data: [
+						{
+							name: "Romania",
+							type: 'line',
+							showInLegend: true,
+							markerSize: 0,
+							dataPoints: ro_array_data
+						}
+					]
+				});
+				chart.render();
+			}
+
+			/* Total cases */
+			var ro_array_data = [];
+			var it_array_data = [];
+			ro.cases.forEach(function(item, index){
+				ro_array_data.push({ x: index, y: item });
+			});
+			it.cases.forEach(function(item, index){
+				it_array_data.push({ x: index, y: item });
+			});
+			plotChart('cases', 'Total cases', 'Day', 'Cases', ro_array_data, it_array_data );
+
+			/* Total tests */
+			var ro_array_data = [];
+			var it_array_data = [];
+			ro.tests.forEach(function(item, index){
+				ro_array_data.push({ x: index, y: item });
+			});
+			it.tests.forEach(function(item, index){
+				it_array_data.push({ x: index, y: item });
+			});
+			plotChart('tests', 'Total tests', 'Day', 'Tests', ro_array_data, it_array_data );
+
+			/* Total recovered */
+			var ro_array_data = [];
+			var it_array_data = [];
+			ro.recovered.forEach(function(item, index){
+				ro_array_data.push({ x: index, y: item });
+			});
+			it.recovered.forEach(function(item, index){
+				it_array_data.push({ x: index, y: item });
+			});
+			plotChart('recovered', 'Total recovered', 'Day', 'Recovered', ro_array_data, it_array_data );
+
+			/* Total deaths */
+			var ro_array_data = [];
+			var it_array_data = [];
+			ro.deaths.forEach(function(item, index){
+				ro_array_data.push({ x: index, y: item });
+			});
+			it.deaths.forEach(function(item, index){
+				it_array_data.push({ x: index, y: item });
+			});
+			plotChart('deaths', 'Total deaths', 'Day', 'Deaths', ro_array_data, it_array_data );
+
+			/* Total cases - optimist case */
+			var ro_array_data = [];
+			var it_array_data = [];
+			ro.cases.forEach(function(item, index){
+				ro_array_data.push({ x: index, y: item });
+			});
+			var it_cases = it.cases.splice(14);
+			it_cases.forEach(function(item, index){
+				it_array_data.push({ x: index, y: item });
+			});
+			plotChart('cases_2', 'Total cases', 'Day', 'Cases', ro_array_data, it_array_data );
+
+			/* Total tests - optimist case */
+			var ro_array_data = [];
+			var it_array_data = [];
+			ro.tests.forEach(function(item, index){
+				ro_array_data.push({ x: index, y: item });
+			});
+			var it_cases = it.tests.splice(14);
+			it_cases.forEach(function(item, index){
+				it_array_data.push({ x: index, y: item });
+			});
+			plotChart('tests_2', 'Total tests', 'Day', 'Tests', ro_array_data, it_array_data );
+
+			/* Total recovered - optimist case */
+			var ro_array_data = [];
+			var it_array_data = [];
+			ro.recovered.forEach(function(item, index){
+				ro_array_data.push({ x: index, y: item });
+			});
+			var it_cases = it.recovered.splice(14);
+			it_cases.forEach(function(item, index){
+				it_array_data.push({ x: index, y: item });
+			});
+			plotChart('recovered_2', 'Total recovered', 'Day', 'Recovered', ro_array_data, it_array_data );
+
+			/* Total deaths - optimist case */
+			var ro_array_data = [];
+			var it_array_data = [];
+			ro.deaths.forEach(function(item, index){
+				ro_array_data.push({ x: index, y: item });
+			});
+			var it_cases = it.deaths.splice(14);
+			it_cases.forEach(function(item, index){
+				it_array_data.push({ x: index, y: item });
+			});
+			plotChart('deaths_2', 'Total deaths', 'Day', 'Deaths', ro_array_data, it_array_data );
+
+			var $tbody = $('table tbody');
+			var daylist = getDaysArray(new Date("2020-2-25"),new Date());
+			ro.cases.forEach(function(item, index){
+				var html = '<tr>';
+				html += '<td>' + daylist[index].getDate() + '.' + daylist[index].getMonth() + '.' + daylist[index].getFullYear() + '</td>';
+				html += '<td>' + ro.cases[index] + '</td>';
+				html += '<td>' + ro.tests[index] + '</td>';
+				html += '<td>' + ro.recovered[index] + '</td>';
+				html += '<td>' + ro.deaths[index] + '</td>';
+				html += '<td>' + (ro.cases[index] - ro.cases[index-1])  + '</td>';
+				html += '<td>' + (ro.tests[index] - ro.tests[index-1]) + '</td>';
+				html += '<td>' + (ro.recovered[index] - ro.recovered[index-1]) + '</td>';
+				html += '<td>' + (ro.deaths[index] - ro.deaths[index-1]) + '</td>';
+				html += '</tr>'
+				$tbody.append(html);
+			});
+
+			/* Daily cases */
+			var ro_array_data = [];
+			ro.cases.forEach(function(item, index){
+				var value = item[index] - item[index - 1];
+				if( index ) {
+					ro_array_data.push({x: daylist[index], y: ro.cases[index] - ro.cases[index-1]});
+				}
+			});
+			plotDailyChart('daily_cases', 'Daily cases', 'Day', 'Cases', ro_array_data );
+
+			/* Daily tests */
+			var ro_array_data = [];
+			ro.tests.forEach(function(item, index){
+				var value = item[index] - item[index - 1];
+				if( index ) {
+					ro_array_data.push({x: daylist[index], y: ro.tests[index] - ro.tests[index-1]});
+				}
+			});
+			plotDailyChart('daily_tests', 'Daily tests', 'Day', 'Tests', ro_array_data );
+
+			/* Daily recovered */
+			var ro_array_data = [];
+			ro.recovered.forEach(function(item, index){
+				var value = item[index] - item[index - 1];
+				if( index ) {
+					ro_array_data.push({x: daylist[index], y: ro.recovered[index] - ro.recovered[index-1]});
+				}
+			});
+			plotDailyChart('daily_recovered', 'Daily recovered', 'Day', 'Recovered', ro_array_data );
+
+			/* Daily deaths */
+			var ro_array_data = [];
+			ro.deaths.forEach(function(item, index){
+				var value = item[index] - item[index - 1];
+				if( index ) {
+					ro_array_data.push({x: daylist[index], y: ro.deaths[index] - ro.deaths[index-1]});
+				}
+			});
+			plotDailyChart('daily_deaths', 'Daily deaths', 'Day', 'Deaths', ro_array_data );
+		}
+	</script>
+</head>
+<body>
+	<div>Chart type:  <a href="?type=line">Line</a> <a href="?type=column">Column</a></div>
+	<div style="float: left; width: 33%; padding: 1%">
+		<h2 style="text-align: center;">Romanian statistics</h2>
+		<div style="float: left; width: 100%;">
+			<table>
+				<thead>
+					<tr>
+						<th>Date</th>
+						<th>Total cases</th>
+						<th>Total tests</th>
+						<th>Total recovered</th>
+						<th>Total deaths</th>
+						<th>Daily cases</th>
+						<th>Daily tests</th>
+						<th>Daily recovered</th>
+						<th>Daily deaths</th>
+					</tr>
+				</thead>
+				<tbody>
+				</tbody>
+			</table>
+			<div id="daily_cases" style="height: 350px; width: 100%; margin-bottom: 50px;"></div>
+			<div id="daily_tests" style="height: 350px; width: 100%; margin-bottom: 50px;"></div>
+			<div id="daily_recovered" style="height: 350px; width: 100%; margin-bottom: 50px;"></div>
+			<div id="daily_deaths" style="height: 350px; width: 100%; margin-bottom: 50px;"></div>
+		</div>
+	</div>
+	<div style="float: left; width: 63%; padding: 1%">
+		<h2 style="text-align: center;">Romania - Italy comparison</h2>
+		<div style="float: left; width: 50%">
+			<h4 style="text-align: center;">Day 1 is considered 25.02.2020 in Romania and 29.01.2020 in Italy</h4>
+			<div id="cases" style="height: 350px; width: 100%; margin-bottom: 50px;"></div>
+			<div id="tests" style="height: 350px; width: 100%; margin-bottom: 50px;"></div>
+			<div id="recovered" style="height: 350px; width: 100%; margin-bottom: 50px;"></div>
+			<div id="deaths" style="height: 350px; width: 100%; margin-bottom: 50px;"></div>
+		</div>
+		<div style="float: left; width: 50%">
+			<h4 style="text-align: center;">Day 1 is considered 25.02.2020 in Romania and 12.02.2020 in Italy</h4>
+			<div id="cases_2" style="height: 350px; width: 100%; margin-bottom: 50px;"></div>
+			<div id="tests_2" style="height: 350px; width: 100%; margin-bottom: 50px;"></div>
+			<div id="recovered_2" style="height: 350px; width: 100%; margin-bottom: 50px;"></div>
+			<div id="deaths_2" style="height: 350px; width: 100%; margin-bottom: 50px;"></div>
+		</div>
+	</div>
+	<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+</body>
+</html>
