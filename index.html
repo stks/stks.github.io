@@ -514,7 +514,7 @@
 			}
 
 			function plotDailyChart( elementID, title, OxTitle, OyTitle, ro_array_data ) {
-				var type = findGetParameter('type') ? findGetParameter('type') : 'column' ;
+				var type = findGetParameter('type') ? findGetParameter('type') : 'line' ;
 				var chart = new CanvasJS.Chart(elementID, {
 					animationEnabled: true,
 					zoomEnabled: true,
