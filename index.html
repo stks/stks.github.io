@@ -439,7 +439,7 @@
 				return arr;
 			}
 
-			function plotChart( elementID, title, OxTitle, OyTitle, ro_array_data, it_array_data ) {
+			function plotChart( elementID, title, OxTitle, OyTitle, ro_array_data, it_array_data, logarithmic = false ) {
 				var type = findGetParameter('type') ? findGetParameter('type') : 'column' ;
 				var chart = new CanvasJS.Chart(elementID, {
 					animationEnabled: true,
@@ -451,7 +451,8 @@
 						title: OxTitle
 					},
 					axisY: {
-						title: OyTitle
+						title: OyTitle,
+						logarithmic: logarithmic
 					},
 					legend:{
 						cursor: "pointer",
@@ -525,6 +526,17 @@
 			});
 			plotChart('cases', 'Total cases', 'Day', 'Cases', ro_array_data, it_array_data );
 
+			/* Total logarithmic cases */
+			var ro_array_data = [];
+			var it_array_data = [];
+			ro.cases.forEach(function(item, index){
+				ro_array_data.push({ x: index, y: item });
+			});
+			it.cases.forEach(function(item, index){
+				it_array_data.push({ x: index, y: item });
+			});
+			plotChart('logarithmic_cases', 'Total cases', 'Day', 'Cases', ro_array_data, it_array_data, true );
+
 			/* Total tests */
 			var ro_array_data = [];
 			var it_array_data = [];
@@ -569,6 +581,17 @@
 				it_array_data.push({ x: index, y: item });
 			});
 			plotChart('cases_2', 'Total cases', 'Day', 'Cases', ro_array_data, it_array_data );
+
+			/* Total logarithmic cases - optimist case */
+			var ro_array_data = [];
+			var it_array_data = [];
+			ro.cases.forEach(function(item, index){
+				ro_array_data.push({ x: index, y: item });
+			});
+			it_cases.forEach(function(item, index){
+				it_array_data.push({ x: index, y: item });
+			});
+			plotChart('logarithmic_cases_2', 'Total cases', 'Day', 'Cases', ro_array_data, it_array_data, true );
 
 			/* Total tests - optimist case */
 			var ro_array_data = [];
@@ -709,6 +732,15 @@
 			<div id="tests_2" style="height: 350px; width: 100%; margin-bottom: 50px;"></div>
 			<div id="recovered_2" style="height: 350px; width: 100%; margin-bottom: 50px;"></div>
 			<div id="deaths_2" style="height: 350px; width: 100%; margin-bottom: 50px;"></div>
+		</div>
+		<h2 style="text-align: center;">Romania - Italy comparison<br>(logarithmic)</h2>
+		<div style="float: left; width: 50%">
+			<h4 style="text-align: center;">Day 1 is considered 25.02.2020 in Romania and 29.01.2020 in Italy</h4>
+			<div id="logarithmic_cases" style="height: 350px; width: 100%; margin-bottom: 50px;"></div>
+		</div>
+		<div style="float: left; width: 50%">
+			<h4 style="text-align: center;">Day 1 is considered 25.02.2020 in Romania and 12.02.2020 in Italy</h4>
+			<div id="logarithmic_cases_2" style="height: 350px; width: 100%; margin-bottom: 50px;"></div>
 		</div>
 	</div>
 	<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
