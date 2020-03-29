@@ -17,6 +17,10 @@
 			border: 1px solid #000;
 			text-align: center;
 		}
+		a {
+			color: #000;
+			margin-left: 5px;
+		}
 	</style>
 	<script>
 		window.onload = function () {
@@ -633,7 +637,7 @@
 			var daylist = getDaysArray(new Date("2020-2-25"),new Date());
 			ro.cases.forEach(function(item, index){
 				var html = '<tr>';
-				html += '<td>' + daylist[index].getDate() + '.' + daylist[index].getMonth() + '.' + daylist[index].getFullYear() + '</td>';
+				html += '<td>' + daylist[index].getDate() + '.' + ( daylist[index].getMonth() + 1 ) + '.' + daylist[index].getFullYear() + '</td>';
 				html += '<td>' + ro.cases[index] + '</td>';
 				html += '<td>' + ro.tests[index] + '</td>';
 				html += '<td>' + ro.recovered[index] + '</td>';
@@ -689,7 +693,10 @@
 	</script>
 </head>
 <body>
-	<div>Chart type:  <a href="?type=line">Line</a> <a href="?type=column">Column</a></div>
+	<div style="overflow: hidden; background: #ccc; padding: 0 10px;">
+		<p style="float: left;">Change the chart type: <a href="?type=line">Line</a> <a href="?type=column">Column</a></p>
+		<p style="float: right;">Drag on the graphics to zoom them.</p>
+	</div>
 	<div style="float: left; width: 33%; padding: 1%">
 		<h2 style="text-align: center;">Romanian statistics</h2>
 		<div style="float: left; width: 100%;">
@@ -718,7 +725,11 @@
 	</div>
 	<div style="float: left; width: 63%; padding: 1%">
 		<h2 style="text-align: center;">Romania - Italy comparison</h2>
-		<h4 style="text-align: center;">Drag on the graphics to zoom them.</h4>
+		<p style="text-align: center;">
+			Romania had its first case on 25.02.2020, while Italy had its first case on 29.01.2020.<br>
+			From 29.01.2020 until 14.01.2020 for Italy the number of confiremed cases hasn't changed, so they still had only one case. <br>
+			I don't know which is the best way to compare Romania and Italy, so I created two graphics, as seen below.
+		</p>
 		<div style="float: left; width: 50%">
 			<h4 style="text-align: center;">Day 1 is considered 25.02.2020 in Romania and 29.01.2020 in Italy</h4>
 			<div id="cases" style="height: 350px; width: 100%; margin-bottom: 50px;"></div>
